@@ -19,8 +19,14 @@ public class Resume {
     @Column(nullable = false)
     private String fileUrl;
 
+
+    @Column
+    private String fileName ;
+    @Column
+    private Long fileSize ;
     @Column(nullable = false)
     private LocalDateTime uploadedAt;
+
 
     // getters & setters
 
