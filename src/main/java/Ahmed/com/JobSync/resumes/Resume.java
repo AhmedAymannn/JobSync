@@ -1,5 +1,5 @@
 package Ahmed.com.JobSync.resumes;
-
+import jakarta.persistence.*;
 import Ahmed.com.JobSync.user.User;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
@@ -12,13 +12,8 @@ public class Resume {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-
     @Column(nullable = false)
     private String fileUrl;
-
 
     @Column
     private String fileName ;
@@ -27,6 +22,8 @@ public class Resume {
     @Column(nullable = false)
     private LocalDateTime uploadedAt;
 
+    @OneToOne(fetch = FetchType.LAZY ,mappedBy = "resume")
+    private User user;
 
     // getters & setters
 
@@ -38,13 +35,7 @@ public class Resume {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
-    }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public String getFileUrl() {
         return fileUrl;
@@ -58,7 +49,33 @@ public class Resume {
         return uploadedAt;
     }
 
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public Long getFileSize() {
+        return fileSize;
+    }
+
+    public void setFileSize(Long fileSize) {
+        this.fileSize = fileSize;
+    }
+
     public void setUploadedAt(LocalDateTime uploadedAt) {
         this.uploadedAt = uploadedAt;
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+
 }

@@ -10,8 +10,8 @@ import java.util.List;
 
 public class JobController {
     // get all of jobs
-    public List<Job> getJobs (){
-        List <Job> jobs = new ArrayList();
-        return jobs ;
-    }
+//    public List<Job> getJobs (){
+//        List <Job> jobs = new ArrayList();
+//        return jobs ;
+//    }
 }

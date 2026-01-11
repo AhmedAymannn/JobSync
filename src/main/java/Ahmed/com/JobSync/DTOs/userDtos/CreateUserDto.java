@@ -1,4 +1,4 @@
-package Ahmed.com.JobSync.DTOs.requestDtos;
+package Ahmed.com.JobSync.DTOs.userDtos;
 
 import jakarta.annotation.Nullable;
 
