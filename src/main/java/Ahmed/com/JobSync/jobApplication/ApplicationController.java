@@ -7,7 +7,7 @@ import java.util.List;
 
 @RestController
 public class ApplicationController {
-    public List<Application> getApplications (){
-        return  new ArrayList<Application>();
-    }
+//    public List<Application> getApplications (){
+//        return  new ArrayList<Application>();
+//    }
 }
