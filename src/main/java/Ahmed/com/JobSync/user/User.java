@@ -1,17 +1,48 @@
 package Ahmed.com.JobSync.user;
 
+<<<<<<< Updated upstream
 import Ahmed.com.JobSync.Enums.ExperienceLevel;
 import Ahmed.com.JobSync.resumes.Resume;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+=======
+    @Entity
+    @Table(name = "users")
+    public class User {
+              @Id
+                @GeneratedValue(strategy = GenerationType.IDENTITY)
+                private Long id;
+                @Column(nullable = false , unique = true)
+                private String email;
+                @Column(nullable = false)
+                private String password;
+                @Column(nullable = false)
+                private String name;
+                @Enumerated(EnumType.STRING)
+                @Column(length = 20)
+                private ExperienceLevel experienceLevel;
+                private LocalDateTime createdAt = LocalDateTime.now();
+                @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+                private JobPreference jobPreference;
+                @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+                private Resume resume;
+                @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+                private List<SearchHistory> searchHistory = new ArrayList<>();
+                @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+                private List<Application> applications = new ArrayList<>();
+>>>>>>> Stashed changes
 
 @Entity
 @Table(name = "users")
 public class User {
 
+<<<<<<< Updated upstream
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+=======
+        public User() {
+>>>>>>> Stashed changes
 
     @Column(nullable = false, unique = true)
     private String email;
