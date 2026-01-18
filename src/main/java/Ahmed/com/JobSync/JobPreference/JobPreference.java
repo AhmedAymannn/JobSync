@@ -2,6 +2,7 @@ package Ahmed.com.JobSync.JobPreference;
 import Ahmed.com.JobSync.Enums.ExperienceLevel;
 import Ahmed.com.JobSync.Enums.JobType;
 import Ahmed.com.JobSync.user.User;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.persistence.*;
 @Entity
@@ -27,11 +28,20 @@ public class JobPreference {
     @Column(length = 255)
     private String location; // Preferred location or "remote"
 
-    private Boolean remote; // Remote only?
+    private Boolean remote = false ; // Remote only?
+    @Column
+    @Nullable
     private Integer experienceYears ;
+<<<<<<< Updated upstream
 
     private Double expectedSalary ;
 
+=======
+    @Column
+    @Nullable
+    private Double expectedSalary ; // Optional minimum salary
+     // Optional maximum salary
+>>>>>>> Stashed changes
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user; // FK → Users.id
@@ -93,6 +103,7 @@ public class JobPreference {
         this.experienceYears = experienceYears;
     }
 
+<<<<<<< Updated upstream
     public Double getExpectedSalary() {
         return expectedSalary;
     }
@@ -101,6 +112,15 @@ public class JobPreference {
         this.expectedSalary = expectedSalary;
     }
 
+=======
+    @Nullable
+    public Double getExpectedSalary() {
+        return expectedSalary;
+    }
+    public void setExpectedSalary(@Nullable Double expectedSalary) {
+        this.expectedSalary = expectedSalary;
+    }
+>>>>>>> Stashed changes
     public User getUser() {
         return user;
     }
