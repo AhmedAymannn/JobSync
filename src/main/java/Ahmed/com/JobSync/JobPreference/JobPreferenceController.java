@@ -7,7 +7,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("preferences")
 public class JobPreferenceController {
-    JobPreferenceService jobPreferenceService ;
+    private final JobPreferenceService jobPreferenceService ;
+
+    public JobPreferenceController(JobPreferenceService jobPreferenceService) {
+        this.jobPreferenceService = jobPreferenceService;
+    }
+
     @Autowired
 
     @PostMapping("/")

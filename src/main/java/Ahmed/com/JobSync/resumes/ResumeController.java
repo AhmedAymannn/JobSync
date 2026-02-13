@@ -11,7 +11,6 @@ public class ResumeController {
     @Autowired
     private ResumeService resumeService;
 
-
     @PostMapping("upLoadResume/{userId}")
     public void uploadResume (
             @RequestParam("file") MultipartFile UploadedFile ,

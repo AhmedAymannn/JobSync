@@ -1,6 +1,6 @@
 package Ahmed.com.JobSync.user;
 
-import Ahmed.com.JobSync.DTOs.responseDtos.UserSummayDto;
+import Ahmed.com.JobSync.user.dtos.UserSummayDto;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,7 +19,7 @@ public class UserService {
 
         }
 
-    public User getMe (Long useeId){
+    public User getUser (Long useeId){
         return userRepository.findById(useeId).orElseThrow();
     }
 
@@ -27,5 +27,7 @@ public class UserService {
       return new User();
 
     }
-
+    public User test (Long id){
+       return userRepository.findById(id).orElseThrow(()-> new RuntimeException());
+    }
 }

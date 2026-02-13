@@ -14,17 +14,16 @@ public class Resume {
 
     @Column(nullable = false)
     private String fileUrl;
-
     @Column
     private String fileName ;
     @Column
     private Long fileSize ;
     @Column(nullable = false)
+
     private LocalDateTime uploadedAt;
 
-    @OneToOne(fetch = FetchType.LAZY ,mappedBy = "resume")
-    private User user;
-
+//    @OneToOne(fetch = FetchType.LAZY ,mappedBy = "resume")
+//    private User user;
     // getters & setters
 
     public Long getId() {

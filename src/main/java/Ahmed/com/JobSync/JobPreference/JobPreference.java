@@ -1,10 +1,11 @@
 package Ahmed.com.JobSync.JobPreference;
-import Ahmed.com.JobSync.Enums.ExperienceLevel;
-import Ahmed.com.JobSync.Enums.JobType;
+import Ahmed.com.JobSync.common.Enums.EmploymentType;
+import Ahmed.com.JobSync.common.Enums.ExperienceLevel;
+import Ahmed.com.JobSync.common.Enums.EmploymentType;
 import Ahmed.com.JobSync.user.User;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import jakarta.persistence.*;
+
 @Entity
 @Table(name = "user_preferences")
 public class JobPreference {
@@ -20,40 +21,45 @@ public class JobPreference {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private JobType jobType;
+    private EmploymentType employmentType;
 
     @Column(length = 255)
-    private String keywords; // Example: "backend developer"
+    @Nullable
+    private String job_title;
+    // Example: "backend developer"
 
     @Column(length = 255)
+    @Nullable
     private String location; // Preferred location or "remote"
-
-    private Boolean remote = false ; // Remote only?
+    private Boolean isRemote = false ; // Remote only?
     @Column
     @Nullable
     private Integer experienceYears ;
-<<<<<<< Updated upstream
-
-    private Double expectedSalary ;
-
-=======
     @Column
     @Nullable
-    private Double expectedSalary ; // Optional minimum salary
-     // Optional maximum salary
->>>>>>> Stashed changes
+    private Double expectedSalary ;
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user; // FK → Users.id
+
+    public JobPreference() {
+    }
+
+    public JobPreference(Long id, ExperienceLevel experienceLevel, EmploymentType employmentType,
+                         @Nullable String job_title, @Nullable String location, Boolean isRemote,
+                         @Nullable Integer experienceYears, @Nullable Double expectedSalary, User user) {
+        this.id = id;
+        this.experienceLevel = experienceLevel;
+        this.employmentType = employmentType;
+        this.job_title = job_title;
+        this.location = location;
+        this.isRemote = isRemote;
+        this.experienceYears = experienceYears;
+        this.expectedSalary = expectedSalary;
+        this.user = user;
+    }
     // getters & setters
 
-    public JobType getJobType() {
-        return jobType;
-    }
-
-    public void setJobType(JobType jobType) {
-        this.jobType = jobType;
-    }
 
     public Long getId() {
         return id;
@@ -71,12 +77,21 @@ public class JobPreference {
         this.experienceLevel = experienceLevel;
     }
 
-    public String getKeywords() {
-        return keywords;
+    @Nullable
+    public String getJob_title() {
+        return job_title;
     }
 
-    public void setKeywords(String keywords) {
-        this.keywords = keywords;
+    public void setJob_title(@Nullable String job_title) {
+        this.job_title = job_title;
+    }
+
+    public Boolean getIsRemote() {
+        return isRemote;
+    }
+
+    public void setRemoteOnly(Boolean remoteOnly) {
+        this.isRemote = isRemote;
     }
 
     public String getLocation() {
@@ -87,23 +102,23 @@ public class JobPreference {
         this.location = location;
     }
 
-    public Boolean getRemote() {
-        return remote;
-    }
-
-    public void setRemote(Boolean remote) {
-        this.remote = remote;
-    }
 
     public Integer getExperienceYears() {
         return experienceYears;
+    }
+
+    public EmploymentType getEmploymentType() {
+        return employmentType;
+    }
+
+    public void setEmploymentType(EmploymentType employmentType) {
+        this.employmentType = employmentType;
     }
 
     public void setExperienceYears(Integer experienceYears) {
         this.experienceYears = experienceYears;
     }
 
-<<<<<<< Updated upstream
     public Double getExpectedSalary() {
         return expectedSalary;
     }
@@ -112,15 +127,6 @@ public class JobPreference {
         this.expectedSalary = expectedSalary;
     }
 
-=======
-    @Nullable
-    public Double getExpectedSalary() {
-        return expectedSalary;
-    }
-    public void setExpectedSalary(@Nullable Double expectedSalary) {
-        this.expectedSalary = expectedSalary;
-    }
->>>>>>> Stashed changes
     public User getUser() {
         return user;
     }

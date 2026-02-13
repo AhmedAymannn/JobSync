@@ -5,4 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface JobPreferenceRepository extends JpaRepository<JobPreference , Long> {
+    JobPreference getReferenceByUserId(Long userId);
 }

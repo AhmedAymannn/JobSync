@@ -1,5 +1,5 @@
 package Ahmed.com.JobSync.resumes;
-import Ahmed.com.JobSync.utils.Storage.*;
+import Ahmed.com.JobSync.common.utils.Storage.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import java.time.LocalDateTime;

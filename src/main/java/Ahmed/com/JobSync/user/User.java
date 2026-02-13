@@ -1,141 +1,138 @@
 package Ahmed.com.JobSync.user;
-
-<<<<<<< Updated upstream
-import Ahmed.com.JobSync.Enums.ExperienceLevel;
+import Ahmed.com.JobSync.common.Enums.ExperienceLevel;
+import Ahmed.com.JobSync.common.Enums.Role;
+import Ahmed.com.JobSync.JobPreference.JobPreference;
+import Ahmed.com.JobSync.jobApplication.Application;
 import Ahmed.com.JobSync.resumes.Resume;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
-=======
-    @Entity
-    @Table(name = "users")
-    public class User {
-              @Id
-                @GeneratedValue(strategy = GenerationType.IDENTITY)
-                private Long id;
-                @Column(nullable = false , unique = true)
-                private String email;
-                @Column(nullable = false)
-                private String password;
-                @Column(nullable = false)
-                private String name;
-                @Enumerated(EnumType.STRING)
-                @Column(length = 20)
-                private ExperienceLevel experienceLevel;
-                private LocalDateTime createdAt = LocalDateTime.now();
-                @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-                private JobPreference jobPreference;
-                @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-                private Resume resume;
-                @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-                private List<SearchHistory> searchHistory = new ArrayList<>();
-                @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-                private List<Application> applications = new ArrayList<>();
->>>>>>> Stashed changes
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
+
 public class User {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+  @Column(nullable = false , unique = true)
+  private String email;
+  @Column(nullable = false)
+  private String password;
+  @Column(nullable = false)
+  private String name;
+  @Enumerated(EnumType.STRING)
+  private Role role ;
+  @Enumerated(EnumType.STRING)
+  @Column(length = 20)
+  private ExperienceLevel experienceLevel;
+  private LocalDateTime createdAt = LocalDateTime.now();
 
-<<<<<<< Updated upstream
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-=======
-        public User() {
->>>>>>> Stashed changes
+  @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+  private JobPreference jobPreference;
 
-    @Column(nullable = false, unique = true)
-    private String email;
+  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+  @JoinColumn(name = "resume_id", referencedColumnName = "id") // Creates FK 'resume_id' in USER table
+  private Resume resume;
 
-    @Column(nullable = false)
-    private String password;
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<Application> applications = new ArrayList<>();
 
-    // Fixed: Added nullable = false to match your requirements
-    @Column(nullable = false)
-    private String name;
+  public User() {
+  }
 
-    @Enumerated(EnumType.STRING)
-    @Column(length = 20)
-    private ExperienceLevel experienceLevel;
+  public User(Long id, String email, String password, String name,Role role ,
+              ExperienceLevel experienceLevel, LocalDateTime createdAt,
+              JobPreference jobPreference, Resume resume, List<Application> applications) {
+    this.id = id;
+    this.email = email;
+    this.password = password;
+    this.name = name;
+    this.experienceLevel = experienceLevel;
+    this.createdAt = createdAt;
+    this.jobPreference = jobPreference;
+    this.resume = resume;
+    this.applications = applications;
+  }
 
-    // Fixed: Added updatable = false so the timestamp doesn't change on updates
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt = LocalDateTime.now();
+  public Long getId() {
+    return id;
+  }
 
-    @OneToOne()
-    @JoinColumn(name = "resume_id" ,referencedColumnName = "id")
-    private Resume resume;
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    // Default constructor (Required by JPA/Jackson)
-    public User() {
-    }
-    // Overloaded constructor
-    public User(Long id, String email, String password, String name, ExperienceLevel experienceLevel , Resume resume) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        this.name = name;
-        this.experienceLevel = experienceLevel;
-        this.createdAt = LocalDateTime.now();
-        this.resume = resume;
-    }
+  public String getEmail() {
+    return email;
+  }
 
-    // --- GETTERS AND SETTERS ---
+  public void setEmail(String email) {
+    this.email = email;
+  }
 
-    public Long getId() {
-        return id;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    public String getEmail() {
-        return email;
-    }
+  public String getPassword() {
+    return password;
+  }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+  public void setPassword(String password) {
+    this.password = password;
+  }
 
-    public String getPassword() {
-        return password;
-    }
+  public ExperienceLevel getExperienceLevel() {
+    return experienceLevel;
+  }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+  public void setExperienceLevel(ExperienceLevel experienceLevel) {
+    this.experienceLevel = experienceLevel;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public LocalDateTime getCreatedAt() {
+    return createdAt;
+  }
 
-    // FIXED: Now correctly assigning the parameter to the class field
-    public void setName(String name) {
-        this.name = name;
-    }
+  public void setCreatedAt(LocalDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
 
-    public ExperienceLevel getExperienceLevel() {
-        return experienceLevel;
-    }
+  public JobPreference getJobPreference() {
+    return jobPreference;
+  }
 
-    public void setExperienceLevel(ExperienceLevel experienceLevel) {
-        this.experienceLevel = experienceLevel;
-    }
+  public void setJobPreference(JobPreference jobPreference) {
+    this.jobPreference = jobPreference;
+  }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
+  public Resume getResume() {
+    return resume;
+  }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
+  public void setResume(Resume resume) {
+    this.resume = resume;
+  }
 
-    public Resume getResume() {
-        return resume;
-    }
+  public List<Application> getApplications() {
+    return applications;
+  }
 
-    public void setResume(Resume resume) {
-        this.resume = resume;
-    }
+  public void setApplications(List<Application> applications) {
+    this.applications = applications;
+  }
+
+  public Role getRole() {
+    return role;
+  }
+
+  public void setRole(Role role) {
+    this.role = role;
+  }
 }

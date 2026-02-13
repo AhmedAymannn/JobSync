@@ -1,9 +1,10 @@
 package Ahmed.com.JobSync.user;
 
-import Ahmed.com.JobSync.DTOs.responseDtos.UserSummayDto;
+import Ahmed.com.JobSync.user.dtos.UserSummayDto;
 import Ahmed.com.JobSync.Mapper.ResponseMapper;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,18 +16,13 @@ public class UserController {
         this.userService = userService ;
     }
 
-    @PostMapping("/createUser")
-    public ResponseEntity <ResponseMapper> createUser(@RequestBody User user){
-        UserSummayDto userSummayDto =  userService.createUser(user);
-        ResponseMapper response = new ResponseMapper();
-
-    }
     // get me
-    @GetMapping("/getMe/{id}")
+    @GetMapping("/{id}")
     public User getUser (@PathVariable Long id){
-       return userService.getMe(id);
+       return userService.getUser(id);
     }
     //updateMe
+
     @PutMapping("/updateMe")
     public void updateUser(){
 
@@ -34,6 +30,12 @@ public class UserController {
     // delete me
     @DeleteMapping("user/deleteMe")
     public void DeleteUser (){
+    }
+    @GetMapping("test")
+    public ResponseEntity <User> test (){
+        Long UserId = (Long) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+       User user= userService.test(UserId);
+       return ResponseEntity.ok(user);
     }
 
 }
